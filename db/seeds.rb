@@ -6,6 +6,7 @@ puts "Deleting old seed data"
 Shelter.destroy_all
 Animal.destroy_all
 Adopter.destroy_all
+Comment.destroy_all
 
 puts "Creating shelters"
 shelter = Shelter.create(shelter_name: "Sprout and Spruce's Shelter", shelter_address: Faker::Address.full_address, shelter_phone: Faker::PhoneNumber.phone_number)
@@ -23,10 +24,13 @@ animal9 = Animal.create(animal_name: Faker::Name.name , breed: "hamster", age: r
 animal10 = Animal.create(animal_name: Faker::Name.name , breed: "fish", age: rand(1..15), shelter_id: shelter.id, adopter_id: rand(1..5))
 
 puts "Creating adopters"
-adopter1 = Adopter.create(adopter_name: Faker::Name.name, email: Faker::Internet.email, adopter_phone: Faker::PhoneNumber.phone_number)
-adopter2 = Adopter.create(adopter_name: Faker::Name.name, email: Faker::Internet.email, adopter_phone: Faker::PhoneNumber.phone_number)
-adopter3 = Adopter.create(adopter_name: Faker::Name.name, email: Faker::Internet.email, adopter_phone: Faker::PhoneNumber.phone_number)
-adopter4 = Adopter.create(adopter_name: Faker::Name.name, email: Faker::Internet.email, adopter_phone: Faker::PhoneNumber.phone_number)
-adopter5 = Adopter.create(adopter_name: Faker::Name.name, email: Faker::Internet.email, adopter_phone: Faker::PhoneNumber.phone_number)
+10.times do
+Adopter.create(adopter_name: Faker::Name.name, email: Faker::Internet.email, adopter_phone: Faker::PhoneNumber.phone_number)
+end
+
+puts "Creating comments"
+10.times do
+    Comment.create(comments: Faker::Hipster.paragraph, animal_id: Animal.all.sample.id, adopter_id: Adopter.all.sample.id)
+end
 
 puts "✅ Done seeding!"
