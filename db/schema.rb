@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2022_03_28_205251) do
     t.string "breed"
     t.integer "age"
     t.integer "shelter_id"
+    t.string "image"
   end
 
   create_table "comments", force: :cascade do |t|
