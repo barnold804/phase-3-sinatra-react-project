@@ -29,6 +29,12 @@ class ApplicationController < Sinatra::Base
     comments.to_json
   end
 
+    #get request for specific comment
+    get '/comments/:id' do 
+      comments = Comment.find(params[:id])
+      comments.to_json
+    end
+
   #get request for all adopters
   get '/adopters' do 
     adopters = Adopter.all
@@ -41,6 +47,17 @@ class ApplicationController < Sinatra::Base
     comment.destroy
     comment.to_json
   end
+
+  #post/create request for new adopter
+  post '/adopters' do
+    adopter = Adopter.create(
+    adopter_name: params[:adopter_name],
+    email: params[:email],
+    adopter_phone: params[:adopter_phone]
+    )
+    adopter.to_json
+  end
+
 
   #post/create request for new comment
   post '/comments' do
